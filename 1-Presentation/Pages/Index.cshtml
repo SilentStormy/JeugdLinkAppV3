@@ -1,0 +1,246 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Alle vaardigheden op één plek";
+}
+<div id="mainCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+   
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row align-items-center">
+                   
+                    <div class="col-md-6 p-5">
+                        <h1 class="fw-bold display-3">Begin vandaag met leren</h1>
+                        <p class="lead">
+                            Ontdek nieuwe vaardigheden en start je persoonlijke ontwikkeling.
+                            Leer van ervaren mentoren en maak de eerste stap naar een succesvolle toekomst.
+                        </p>
+                    </div>
+                   
+                    <div class="col-md-6 text-center">
+                        <img src="~/Images/Senior 1.jpg" class="img-fluid" alt="Slide 1" style="max-height: 500px; width: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+   
+
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row align-items-center">
+                   
+                    <div class="col-md-6 p-5">
+                        <h1 class="fw-bold display-4">Verbeter je vaardigheden</h1>
+                        <p class="lead">
+                            Werk samen met ervaren senior mentors en ontwikkel praktische vaardigheden
+                            die je helpen in je carrière en persoonlijke groei.
+                        </p>
+                    </div>
+                   
+                    <div class="col-md-6 text-center">
+                        <img src="~/Images/Senior 2.jpg" class="img-fluid" alt="Slide 2" style="max-height: 500px; width: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Vorige</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Volgende</span>
+    </button>
+
+
+</div>
+
+<section id="over-ons" class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Tekstgedeelte -->
+            <div class="col-md-6">
+                <h2 class="fw-bold">Over Ons</h2>
+                <p>
+                    <strong>JeugdLinkApp</strong> is dé plek waar generaties samenkomen. Wij geloven dat
+                    <strong>ervaren senioren</strong> waardevolle kennis en vaardigheden kunnen delen
+                    met enthousiaste jongeren. Of het nu gaat om <em>technische vaardigheden, leiderschap</em>
+                    of praktische ervaringen uit het leven – er is altijd iets te leren en te delen.
+                </p>
+                <p>
+                    Door het verbinden van senioren en jongeren via onze cursussen en mentorprogramma's,
+                    creëren we <strong>nieuwe kansen</strong> voor persoonlijke groei, wederzijds respect
+                    en succesvolle samenwerking.
+                </p>
+               
+            </div>
+
+            <div class="col-md-6 text-center">
+                <img src="~/Images/HandonHand.png" alt="Senioren en jongeren samenwerken" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container mt-4">
+    <h2 class="fw-bold text-center">Alle vaardigheden die je nodig hebt op één plek</h2>
+    <p class="text-center text-muted">Van kritieke vaardigheden tot technische onderwerpen, ontdek cursussen die jouw professionele ontwikkeling ondersteunen.</p>
+    <ul class="nav nav-pills mb-3 justify-content-start" id="pills-tab" role="tablist">
+        <!-- "Alle categorieën" button -->
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="all-categories-tab" data-bs-toggle="pill" data-bs-target="#all-categories" type="button" role="tab" aria-controls="all-categories" aria-selected="true">Alle categorieën</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="data-science-tab" data-bs-toggle="pill" data-bs-target="#data-science" type="button" role="tab" aria-controls="data-science" aria-selected="false">Data Science</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="leadership-tab" data-bs-toggle="pill" data-bs-target="#leadership" type="button" role="tab" aria-controls="leadership" aria-selected="false">Leiderschap</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="development-tab" data-bs-toggle="pill" data-bs-target="#development" type="button" role="tab" aria-controls="development" aria-selected="false">Webontwikkeling</button>
+        </li>
+    </ul>
+
+    
+    <div class="tab-content" id="pills-tabContent">
+        
+        <div class="tab-pane fade show active" id="all-categories" role="tabpanel" aria-labelledby="all-categories-tab">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                @if (Model.AllCourses != null && Model.AllCourses.Any())
+                {
+                    @foreach (var course in Model.AllCourses)
+                    {
+                        <div class="col mb-4">
+                            <div class="card shadow-sm">
+                                <img src="~/@course.CourseImage" class="card-img-top" alt="@course.Title">
+                                <div class="card-body">
+                                    <h5 class="card-title">@course.Title</h5>
+                                    <p class="card-text">@course.Description</p>
+                                    <p class="text-muted">Begint op: @course.Date.ToString("dd-MM-yyyy")</p>
+                                    <a href="#" class="btn btn-primary">Bekijk cursus</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-center">Er zijn momenteel geen beschikbare cursussen.</p>
+                }
+            </div>
+        </div>
+
+        
+        <div class="tab-pane fade" id="data-science" role="tabpanel" aria-labelledby="data-science-tab">
+            <p class="text-center">Cursussen over Data Science komen binnenkort!</p>
+        </div>
+
+      
+        <div class="tab-pane fade" id="leadership" role="tabpanel" aria-labelledby="leadership-tab">
+            <p class="text-center">Cursussen over leiderschap komen binnenkort!</p>
+        </div>
+
+       
+        <div class="tab-pane fade" id="development" role="tabpanel" aria-labelledby="development-tab">
+            <p class="text-center">Cursussen over webontwikkeling komen binnenkort!</p>
+        </div>
+    </div>
+</div>
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Zie wat anderen bereiken door te leren</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <!-- Review 1 -->
+            <div class="col">
+                <div class="card border-0 shadow-sm p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="mb-3">
+                            <i class="fas fa-quote-left fa-2x text-warning"></i>
+                        </div>
+                        <p class="text-muted mb-3">
+                            JeugdLink is beoordeeld als het meest waardevolle platform voor professionele vaardigheden volgens de
+                            <strong>StackOverflow-enquête</strong>.
+                        </p>
+                    </div>
+                    <div class="d-flex align-items-center mt-auto">
+                        <img src="images/stackoverflow-logo.png" alt="Logo" class="rounded-circle me-3" style="width: 50px;">
+                        <div>
+                            <span class="fw-bold">37.076 reacties verzameld</span>
+                        </div>
+                    </div>
+                    <a href="#" class="text-decoration-none text-warning mt-3 fw-bold">Bekijk Webontwikkeling cursussen &raquo;</a>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="col">
+                <div class="card border-0 shadow-sm p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="mb-3">
+                            <i class="fas fa-quote-left fa-2x text-warning"></i>
+                        </div>
+                        <p class="text-muted mb-3">
+                            JeugdLink was echt een <strong>game-changer</strong> en een geweldige gids voor mijn carrière.
+                        </p>
+                    </div>
+                    <div class="d-flex align-items-center mt-auto">
+                        <img src="images/profile1.jpg" alt="User" class="rounded-circle me-3" style="width: 50px;">
+                        <div>
+                            <span class="fw-bold">Alvin Lim</span><br>
+                            <small class="text-muted">CTO bij Dimensional</small>
+                        </div>
+                    </div>
+                    <a href="#" class="text-decoration-none text-warning mt-3 fw-bold">Bekijk Swift cursussen &raquo;</a>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="col">
+                <div class="card border-0 shadow-sm p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="mb-3">
+                            <i class="fas fa-quote-left fa-2x text-warning"></i>
+                        </div>
+                        <p class="text-muted mb-3">
+                            Dankzij JeugdLink heb ik de <strong>vaardigheden</strong> geleerd die nodig zijn voor mijn nieuwe rol.
+                        </p>
+                    </div>
+                    <div class="d-flex align-items-center mt-auto">
+                        <img src="images/profile2.jpg" alt="User" class="rounded-circle me-3" style="width: 50px;">
+                        <div>
+                            <span class="fw-bold">William A. Wachlin</span><br>
+                            <small class="text-muted">Manager bij AWS</small>
+                        </div>
+                    </div>
+                    <a href="#" class="text-decoration-none text-warning mt-3 fw-bold">Bekijk AWS cursussen &raquo;</a>
+                </div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="col">
+                <div class="card border-0 shadow-sm p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="mb-3">
+                            <i class="fas fa-quote-left fa-2x text-warning"></i>
+                        </div>
+                        <p class="text-muted mb-3">
+                            Met JeugdLink Business hebben medewerkers geleerd <strong>technologie</strong> en soft skills te combineren.
+                        </p>
+                    </div>
+                    <div class="d-flex align-items-center mt-auto">
+                        <img src="images/profile3.jpg" alt="User" class="rounded-circle me-3" style="width: 50px;">
+                        <div>
+                            <span class="fw-bold">Ian Stevens</span><br>
+                            <small class="text-muted">Hoofd Ontwikkeling bij Publicis</small>
+                        </div>
+                    </div>
+                    <a href="#" class="text-decoration-none text-warning mt-3 fw-bold">Lees het volledige verhaal &raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+

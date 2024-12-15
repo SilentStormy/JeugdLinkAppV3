@@ -1,0 +1,201 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+#over-ons h2 {
+    font-size: 2.5rem;
+    color: #333;
+    padding: 15px;
+}
+
+#over-ons p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    padding: 15px;
+    color: #555;
+}
+
+
+
+#over-ons img {
+    max-height: 400px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card {
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.text-warning {
+    color: #FFB300 !important;
+}
+
+.fas.fa-quote-left {
+    color: #FFB300;
+}
+
+.text-decoration-none {
+    font-weight: bold;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+}
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+.card-text {
+    flex-grow: 1; /* Tekst vult beschikbare ruimte */
+}
+.card-body {
+    flex-grow: 1; /* Zorgt dat de body van de kaart zich uitstrekt */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Verdeelt de ruimte gelijkmatig */
+}
+.card-img-top {
+    width: 100%;
+    height: 200px; /* Bepaalt de vaste hoogte van afbeeldingen */
+    object-fit: cover; /* Zorgt ervoor dat de afbeelding niet vervormd raakt */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #f8f9fa;
+    padding: 5px;
+}
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 20px;
+}
+
+.section-heading {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.card .btn {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    .card .btn:hover {
+        background-color: black;
+        transform: scale(1.05);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+.text-decoration-none:hover {
+    color: #FFB300;
+    text-decoration: underline;
+}
+
+
+
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 2%;
+    opacity: 5;
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-image: none; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    font-size: 5rem; 
+    color: #FFA500; 
+}
+
+
+.carousel-control-prev::before,
+.carousel-control-next::before {
+    content: '\2039'; 
+    font-size: 4rem; 
+    color: #FFA500; 
+}
+
+.carousel-control-next::before {
+    content: '\203A'; 
+}
+
+.nav-pills {
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.nav-pills .nav-link {
+    color: white;
+    font-weight: bold;
+    border-radius: 30px; 
+    padding: 10px 20px;
+    margin: 0 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+#all-categories-tab {
+    background-color: #FFB300; 
+    
+}
+
+
+#data-science-tab {
+    background-color: #FFCC80; 
+    
+}
+
+#leadership-tab {
+    background-color: #FFCC80; 
+}
+
+#development-tab {
+    background-color: #FFCC80; 
+}
+
+
+.nav-pills .nav-link:hover,
+.nav-pills .nav-link.active {
+    background-color: #FFB300;
+    color: white;
+    
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
