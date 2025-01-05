@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,17 @@ using System.Threading.Tasks;
 
 namespace JeugdLinkDAL.Data
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext : IdentityDbContext
     {
-        public ApplicationContext(DbContextOptions options) : base(options)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
 
+
         }
-        public DbSet<User> users { get; set; }
-        public DbSet<Course> courses { get; set; }
+       
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<Course> Course { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Mentor> Mentor { get; set; }   
     }
 }

@@ -1,5 +1,5 @@
 
-using JeugdLinkBLL.Interfaces;
+//using JeugdLinkBLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Runtime.CompilerServices;
@@ -8,11 +8,11 @@ namespace JeugLinkApp.Pages
 {
     public class LoginModel : PageModel
     {
-        private readonly IAuthenticator authenticator;
+        //private readonly IAuthenticator authenticator;
 
-        public LoginModel(IAuthenticator authenticator)
+        public LoginModel(/*IAuthenticator authenticator*/)
         {
-            this.authenticator = authenticator; 
+            //this.authenticator = authenticator; 
         }
         [BindProperty]
         public string Email{ get; set; }
@@ -34,8 +34,18 @@ namespace JeugLinkApp.Pages
 
             try
             {
-                var user = await authenticator.Login(Email,Password);
-                return RedirectToPage("/Index");
+                //var result = await authenticator.Login(Email,Password);
+                //if (result !=null)
+                //{
+                //    TempData["Loginsuccess"] = "Inloggen gelukt! Welkom terug!";
+                //    return RedirectToPage("/Index");
+                //}
+                //else 
+                //{
+                //    TempData["LoginError"] = "Inloggen Mislukt! Controleer je emailadres en wachtwoord!";
+                //    return RedirectToPage("/Index");
+                //}
+              
             }
             catch (Exception ex)
             {

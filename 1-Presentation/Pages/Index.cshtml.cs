@@ -10,24 +10,40 @@ namespace JeugLinkApp.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly ICourseManager _courseManager;
+        private readonly ICategoryservice _categoryservice;
+        private readonly ICourseservice _courseservice;
 
-        public IndexModel(ILogger<IndexModel> logger, ICourseManager courseManager)
+        public IndexModel(ILogger<IndexModel> logger, ICategoryservice categoryservice,ICourseservice courseservice)
         {
             _logger = logger;
-            _courseManager = courseManager;
+            _categoryservice = categoryservice;
+           _courseservice= courseservice;
+          
         }
 
-        [BindProperty]
 
-        public List<Course> AllCourses { get; set; }=new List<Course>();
-        public async Task<IActionResult> OnGet()
+        public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<Course> Courses { get; set; } 
+        public IEnumerable<Course> CourseByCategory { get; set; }
+        public int? SelectedCategoryId { get; set; }
+        public void OnGet(int? categoryId)
         {
             try
             {
-                
-                var courses=await _courseManager.GetAllCourses();
-                AllCourses=new List<Course>(courses);
+                Categories = _categoryservice.GetAllCategories();
+                SelectedCategoryId = categoryId;
+                if(categoryId.HasValue)
+                {
+                    var SelectedCategory = Categories.FirstOrDefault(c => c.categoryId == categoryId);
+                    if(SelectedCategory != null)
+                    {
+                        Courses=_courseservice.GetCourseByCategory(SelectedCategory);
+                    }
+                }
+               
+                Courses = _courseservice.GetAllCourses();
+                ViewData["Category"]=Categories;
+                ViewData["Course"] = Courses;
 
             }
             catch (Exception ex)
@@ -35,7 +51,7 @@ namespace JeugLinkApp.Pages
                 _logger.LogError(string.Empty, ex.Message);
             }
 
-            return Page();
+           
         }
     }
 }

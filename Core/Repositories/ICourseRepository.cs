@@ -1,5 +1,4 @@
-﻿
-using Core.Entities;
+﻿using Core.Entities;
 using Core.Repositories.Base;
 using System;
 using System.Collections.Generic;
@@ -11,6 +10,10 @@ namespace Core.Repositories
 {
     public interface ICourseRepository:IRepository<Course>
     {
-        Task <IReadOnlyList<Course>> GetAllCoursesAsync(); 
+        
+            IEnumerable<Course> GetAllCourses();
+            IEnumerable<Course> GetCourseByCategory(Category category);
+        
+
     }
 }

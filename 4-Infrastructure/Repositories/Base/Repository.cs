@@ -13,47 +13,55 @@ namespace JeugdLinkDAL.Repositories.Base
     public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly ApplicationContext _dbcontext;
+        internal DbSet<T> dbSet;
 
         public Repository(ApplicationContext dbcontext)
         {
             _dbcontext = dbcontext;
+            this.dbSet=dbcontext.Set<T>(); 
         }
 
-        public async Task<T> AddAsync(T entity)
-        {
-            _dbcontext.Set<T>().Add(entity);
-            await _dbcontext.SaveChangesAsync();
-            return entity;
-        }
-
-        public async Task DeleteAsync(T entity)
-        {
-            _dbcontext.Set<T>().Remove(entity);
-            await _dbcontext.SaveChangesAsync();
-
-        }
-
-        public async Task UpdateAsync(T entity)
-        {
-            _dbcontext.Entry(entity).State = EntityState.Modified;
-            await _dbcontext.SaveChangesAsync();
-        }
-     
-        public async Task<IReadOnlyList<T>> GetAllAsync()
-        {
-            return await _dbcontext.Set<T>().ToListAsync();
-        }
-
+       
         public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null)
         {
-            IQueryable<T> query = _dbcontext.Set<T>();
+            IQueryable<T> query = dbSet;
             if (filter != null)
             {
-                query = query.Where(filter);
+                query=query.Where(filter);
             }
+
+
             return query.FirstOrDefault();
         }
 
+        public IEnumerable<T> GetAll()
+        {
+            IQueryable<T> query = dbSet;
+            return query.ToList();
+        }
 
+        public void Add(T entity)
+        {
+            dbSet.Add(entity);  
+        }
+
+        public void Update(T entity)
+        {
+            dbSet.Update(entity);
+        }
+
+        public void Delete(T entity)
+        {
+            dbSet.Remove(entity);
+        }
+        public void RemoveRange(IEnumerable<T> entity)
+        {
+            dbSet.RemoveRange(entity);
+        }
+
+        public IEnumerable<T> GetByCondition(Expression<Func<T, bool>>? filter = null)
+        {
+            return dbSet.Where(filter).ToList();
+        }
     }
 }

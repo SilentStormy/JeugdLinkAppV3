@@ -7,11 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\IAuthenticator.cs" />
+    <Compile Remove="Interfaces\ICourseManager.cs" />
+    <Compile Remove="Interfaces\IRegistration.cs" />
+    <Compile Remove="Services\Authentication.cs" />
+    <Compile Remove="Services\Registration.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\4-Infrastructure\JeugdLinkDAL.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,13 +10,14 @@ namespace Core.Repositories.Base
     public interface IRepository<T> where T : class
     {
 
-        Task<T> AddAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(T entity);
 
-
-        Task<IReadOnlyList<T>> GetAllAsync();
-        T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null);
+        void RemoveRange(IEnumerable<T> entity);  
+       IEnumerable<T> GetAll();
+        T GetFirstOrDefault(Expression<Func<T, bool>>? filter=null);
+        IEnumerable<T> GetByCondition(Expression<Func<T, bool>>? filter = null);  
 
     }
 }
