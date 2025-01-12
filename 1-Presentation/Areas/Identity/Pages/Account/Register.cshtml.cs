@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using NuGet.Common;
 
 namespace JeugdLinkApp.Areas.Identity.Pages.Account
 {
@@ -32,6 +33,7 @@ namespace JeugdLinkApp.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private string Message { get; set; }
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -138,6 +140,7 @@ namespace JeugdLinkApp.Areas.Identity.Pages.Account
                 user.dateofbirth = Input.DateOfBirth;
                 user.PhoneNumber = Input.Phonenumber;
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                
                 if(!await _roleManager.RoleExistsAsync(Role.AdminRole))
                 {
                     _roleManager.CreateAsync(new IdentityRole(Role.AdminRole)).GetAwaiter().GetResult();
@@ -148,6 +151,7 @@ namespace JeugdLinkApp.Areas.Identity.Pages.Account
                 }
                 if(result.Succeeded)
                 {
+                    
                     string role = Request.Form["rdUserRole"].ToString();
                     if (role == Role.AdminRole)
                     {
@@ -166,6 +170,9 @@ namespace JeugdLinkApp.Areas.Identity.Pages.Account
                             
                         }
                     }
+                    var token=await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var ConfirmationMail = Url.Action("Confirmed Email", "Email", new { token, Email = user.Email }, Request.Scheme);
+                    
                     
                 }
 

@@ -1,0 +1,42 @@
+﻿@page
+@model JeugdLinkApp.Pages.CursussenModel
+@{
+}
+<h2> Alle Cursussen</h2>
+<div class="tab-content">
+    <div class="tab-pane fade show active">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            @if (Model.Courses != null && Model.Courses.Any())
+            {
+                @foreach (var course in Model.Courses)
+                {
+                    <div class="col mb-4">
+                        <div class="card shadow-sm">
+                            <img src="~/@course.courseimage" class="card-img-top" alt="@course.title">
+                            <div class="card-body">
+                                <h5 class="card-title">@course.title</h5>
+                                <p class="card-text">
+                                    @if (!string.IsNullOrEmpty(course.description) && course.description.Length > 100)
+                                    {
+                                        @($"{course.description.Substring(0, 100)}...")
+                                    }
+                                    else
+                                    {
+                                        @course.description
+                                    }
+                                </p>
+                                <p class="text-muted">Begint op: @course.startdate.ToString("dd-MM-yyyy")</p>
+                                <a asp-page="/Cursus" asp-route-id="@course.courseid" class="btn btn-primary">Bekijk cursus</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-center">Geen cursussen beschikbaar voor deze categorie.</p>
+            }
+        </div>
+    </div>
+</div>
+</div>

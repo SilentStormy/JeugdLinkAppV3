@@ -5,7 +5,7 @@
 namespace JeugdLinkDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class addCourseToDb : Migration
+    public partial class DummyMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

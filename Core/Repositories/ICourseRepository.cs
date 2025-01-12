@@ -13,7 +13,12 @@ namespace Core.Repositories
         
             IEnumerable<Course> GetAllCourses();
             IEnumerable<Course> GetCourseByCategory(Category category);
-        
+            Course GetCourseById(int id);
+            void TryEnrollCourse(Student student,Course course);
+            IEnumerable<Course> SearchCourse(Course course);
+
+
+
 
     }
-}
+}       

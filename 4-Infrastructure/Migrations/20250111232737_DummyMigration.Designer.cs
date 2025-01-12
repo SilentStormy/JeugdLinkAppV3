@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JeugdLinkDAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250105163226_addCourseToDb")]
-    partial class addCourseToDb
+    [Migration("20250111232737_DummyMigration")]
+    partial class DummyMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,33 @@ namespace JeugdLinkDAL.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Core.Entities.BookedCourse", b =>
+                {
+                    b.Property<int>("bookedcourseid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("bookeddate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("courseid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("studentId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("studentid")
+                        .HasColumnType("int");
+
+                    b.HasKey("bookedcourseid");
+
+                    b.HasIndex("courseid");
+
+                    b.HasIndex("studentId");
+
+                    b.ToTable("BookedCourses");
+                });
 
             modelBuilder.Entity("Core.Entities.Category", b =>
                 {
@@ -43,41 +70,64 @@ namespace JeugdLinkDAL.Migrations
 
             modelBuilder.Entity("Core.Entities.Course", b =>
                 {
-                    b.Property<int>("courseId")
+                    b.Property<int>("courseid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("categoryid")
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MentorId")
                         .HasColumnType("int");
 
                     b.Property<string>("courseimage")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<double>("courseprice")
-                        .HasColumnType("double");
-
-                    b.Property<DateTime>("date")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("mentorid")
+                    b.Property<int>("maxstudents")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("startdate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("title")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("courseId");
-
-                    b.HasIndex("categoryid");
-
-                    b.HasIndex("mentorid");
+                    b.HasKey("courseid");
 
                     b.ToTable("Course");
+                });
+
+            modelBuilder.Entity("Core.Entities.Enrolledstudent", b =>
+                {
+                    b.Property<int>("enrolledstudentid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("courseid")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("enrollementdate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("studentId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("studentid")
+                        .HasColumnType("int");
+
+                    b.HasKey("enrolledstudentid");
+
+                    b.HasIndex("courseid");
+
+                    b.HasIndex("studentId");
+
+                    b.ToTable("Enrolledstudent");
                 });
 
             modelBuilder.Entity("Core.Entities.Mentor", b =>
@@ -324,23 +374,48 @@ namespace JeugdLinkDAL.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("Core.Entities.Course", b =>
+            modelBuilder.Entity("Core.Entities.Student", b =>
                 {
-                    b.HasOne("Core.Entities.Category", "Category")
+                    b.HasBaseType("Core.Entities.ApplicationUser");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Student");
+                });
+
+            modelBuilder.Entity("Core.Entities.BookedCourse", b =>
+                {
+                    b.HasOne("Core.Entities.Course", "course")
                         .WithMany()
-                        .HasForeignKey("categoryid")
+                        .HasForeignKey("courseid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Mentor", "Mentor")
-                        .WithMany()
-                        .HasForeignKey("mentorid")
+                    b.HasOne("Core.Entities.Student", "student")
+                        .WithMany("bookedcourses")
+                        .HasForeignKey("studentId");
+
+                    b.Navigation("course");
+
+                    b.Navigation("student");
+                });
+
+            modelBuilder.Entity("Core.Entities.Enrolledstudent", b =>
+                {
+                    b.HasOne("Core.Entities.Course", "course")
+                        .WithMany("Enrolledstudents")
+                        .HasForeignKey("courseid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.HasOne("Core.Entities.Student", "student")
+                        .WithMany()
+                        .HasForeignKey("studentId");
 
-                    b.Navigation("Mentor");
+                    b.Navigation("course");
+
+                    b.Navigation("student");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -392,6 +467,16 @@ namespace JeugdLinkDAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Entities.Course", b =>
+                {
+                    b.Navigation("Enrolledstudents");
+                });
+
+            modelBuilder.Entity("Core.Entities.Student", b =>
+                {
+                    b.Navigation("bookedcourses");
                 });
 #pragma warning restore 612, 618
         }

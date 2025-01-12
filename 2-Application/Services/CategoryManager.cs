@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace JeugdLinkBLL.Services
 {
-    public class CategoryService : ICategoryservice
+    public class CategoryManager : ICategoryservice
     {
         private readonly ICategoryRepository _categoryRepository;
-        private readonly ILogger<CategoryService> _logger;
+        private readonly ILogger<CategoryManager> _logger;
 
-        public CategoryService(ICategoryRepository categoryRepository, ILogger<CategoryService> logger)
+        public CategoryManager(ICategoryRepository categoryRepository, ILogger<CategoryManager> logger)
         {
             _categoryRepository = categoryRepository;
             _logger = logger;

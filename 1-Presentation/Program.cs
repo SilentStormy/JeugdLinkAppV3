@@ -18,10 +18,13 @@ builder.Services.AddSession();
 builder.Services.AddDbContext<ApplicationContext>(options =>
 options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 27))));
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
+builder.Services.Configure<IdentityOptions>(options =>
+options.SignIn.RequireConfirmedEmail = true
+);
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); //database related
-builder.Services.AddScoped<ICategoryservice, CategoryService>();
+builder.Services.AddScoped<ICategoryservice, CategoryManager>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
-builder.Services.AddScoped<ICourseservice, CourseService>();    
+builder.Services.AddScoped<ICourseservice, CourseManager>();    
 builder.Services.AddIdentity<IdentityUser,IdentityRole>()
 .AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
 
@@ -43,24 +46,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-using (var scope = app.Services.CreateScope())
-{
-    var categoryService = scope.ServiceProvider.GetRequiredService<ICategoryservice>();
-    var categories = categoryService.GetAllCategories();
 
-    if (categories == null || !categories.Any())
-    {
-        Console.WriteLine("[ERROR]: No categories found. Check database connection or seeding.");
-    }
-    else
-    {
-        Console.WriteLine("[INFO]: Categories successfully retrieved:");
-        foreach (var category in categories)
-        {
-            Console.WriteLine($"- {category.name} ({category.description})");
-        }
-    }
-}
 app.MapRazorPages();
 
 app.Run();

@@ -15,9 +15,12 @@ namespace Core.Repositories.Base
         void Delete(T entity);
 
         void RemoveRange(IEnumerable<T> entity);  
-       IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll();
         T GetFirstOrDefault(Expression<Func<T, bool>>? filter=null);
+        T GetById(int id);
         IEnumerable<T> GetByCondition(Expression<Func<T, bool>>? filter = null);  
+
+        
 
     }
 }

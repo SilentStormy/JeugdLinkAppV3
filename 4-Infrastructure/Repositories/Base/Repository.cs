@@ -1,6 +1,7 @@
 ﻿using Core.Repositories.Base;
 using JeugdLinkDAL.Data;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,12 @@ namespace JeugdLinkDAL.Repositories.Base
         public IEnumerable<T> GetByCondition(Expression<Func<T, bool>>? filter = null)
         {
             return dbSet.Where(filter).ToList();
+        }
+
+        public T GetById(int id)
+        {            
+                return dbSet.Find(id);
+            
         }
     }
 }

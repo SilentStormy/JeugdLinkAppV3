@@ -28,6 +28,7 @@ namespace Core.Entities
             get => Firstname;
             set => Firstname = value; 
         }
+       
 
         [Required]
         [Display(Name = "Achternaam")]

@@ -20,6 +20,9 @@ namespace JeugdLinkDAL.Data
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Course> Course { get; set; }
         public DbSet<Category> Category { get; set; }
-        public DbSet<Mentor> Mentor { get; set; }   
+        public DbSet<Mentor> Mentor { get; set; }  
+        public DbSet<Student> Student { get; set; }  
+        public DbSet<BookedCourse> BookedCourses { get; set; }   
+        public DbSet<Enrolledstudent> Enrolledstudent { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System;
 namespace UnitTestProjectUser
 {
     [TestClass]
-    public class UnitTest1
+    public class CourseTest
     {
         [TestMethod]
         public void TestMethod1()

@@ -23,28 +23,27 @@ namespace JeugLinkApp.Pages
 
 
         public IEnumerable<Category> Categories { get; set; }
-        public IEnumerable<Course> Courses { get; set; } 
-        public IEnumerable<Course> CourseByCategory { get; set; }
+        public IEnumerable<Course> Courses { get; set; }
         public int? SelectedCategoryId { get; set; }
+
         public void OnGet(int? categoryId)
         {
             try
             {
                 Categories = _categoryservice.GetAllCategories();
                 SelectedCategoryId = categoryId;
-                if(categoryId.HasValue)
+                if (categoryId.HasValue)
                 {
-                    var SelectedCategory = Categories.FirstOrDefault(c => c.categoryId == categoryId);
-                    if(SelectedCategory != null)
-                    {
-                        Courses=_courseservice.GetCourseByCategory(SelectedCategory);
-                    }
+                    Courses = _courseservice.GetCourseByCategory(new Category { categoryId = categoryId.Value });
                 }
-               
-                Courses = _courseservice.GetAllCourses();
+                else
+                {
+                    Courses = _courseservice.GetAllCourses();
+                }
+                
                 ViewData["Category"]=Categories;
                 ViewData["Course"] = Courses;
-
+                    
             }
             catch (Exception ex)
             {

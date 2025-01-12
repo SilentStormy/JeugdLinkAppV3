@@ -16,12 +16,12 @@ using Microsoft.Extensions.Logging;
 
 namespace JeugdLinkBLL.Services
 {
-    public class CourseService : ICourseservice
+    public class CourseManager : ICourseservice
     {
         private readonly ICourseRepository _courserepository;
-        private readonly ILogger<CourseService> _logger; 
+        private readonly ILogger<CourseManager> _logger;
 
-        public CourseService(ICourseRepository courseRepository,ILogger<CourseService> logger)
+        public CourseManager(ICourseRepository courseRepository, ILogger<CourseManager> logger)
         {
             _courserepository = courseRepository;
             _logger = logger;
@@ -41,7 +41,7 @@ namespace JeugdLinkBLL.Services
             }
         }
 
-       
+
 
         public IEnumerable<Course> GetCourseByCategory(Category category)
         {
@@ -56,5 +56,49 @@ namespace JeugdLinkBLL.Services
                 throw;
             }
         }
+
+        public Course GetCourseById(int id)
+        {
+            try
+            {
+                _logger.LogInformation("Fetching all the courses");
+                return _courserepository.GetCourseById(id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"An error occured while fetching courses: {ex.Message}");
+                throw;
+            }
+
+        }
+
+        public IEnumerable<Course> SearchCourse(Course course)
+        {
+            try
+            {
+                return _courserepository.SearchCourse(course);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"An error occurred while searching for courses: {ex.Message}");
+                throw;
+            }
+        }
+
+        public void TryEnrollCourse(Student student, Course course)
+        {
+            try
+            {
+                _logger.LogInformation("Fetching all the courses");
+                 _courserepository.TryEnrollCourse(student, course);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"An error occured while fetching courses: {ex.Message}");
+                throw;
+            }
+        }
+
+        
     }
 }

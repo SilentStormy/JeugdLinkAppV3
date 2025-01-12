@@ -8,10 +8,9 @@ namespace Core.Entities
 {
     public class Category
     {
-        private int CategoryId { get; set; }
-        private string Name { get; set; }
-        private string Description{ get; set; }
-
+        private int CategoryId;
+        private string Name;
+        private string Description;
         public int categoryId
         {
             get { return CategoryId; }

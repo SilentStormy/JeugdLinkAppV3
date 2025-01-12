@@ -48,11 +48,11 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                
-                <a class="navbar-brand" asp-area="" asp-page="/Index">JeugLinkApp</a>
-                <div class="dropdown">
+
+                <a class="navbar-brand" asp-page="/Index">JeugdLinkApp</a>
+               @* <div class="dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownCategories" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Ontdekken
+                        Categorieën
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownCategories">
                         @if (ViewData["Category"] != null)
@@ -60,7 +60,11 @@
                             var categories = (IEnumerable<Core.Entities.Category>)ViewData["Category"];
                             foreach (var category in categories)
                             {
-                                <li><a class="dropdown-item" href="/Category/Details?id=@category.categoryId">@category.name</a></li>
+                                <li>
+                                    <a class="dropdown-item" asp-page="/CategoryDetails" asp-route-id="@category.categoryId">
+                                        @category.name
+                                    </a>
+                                </li>
                             }
                         }
                         else
@@ -68,25 +72,26 @@
                             <li><a class="dropdown-item disabled" href="#">Geen categorieën beschikbaar</a></li>
                         }
                     </ul>
-                </div>
+                </div>*@
 
 
-
-                <form class="d-flex mx-auto w-50">
+                <form asp-page="/SearchResult" method="get" class="d-flex mx-auto w-50">
                     <div class="input-group">
-                        <input type="search" class="form-control rounded-start border-0" placeholder="Zoek iets..." aria-label="Zoek" />
-                        <span class="input-group-text bg-white border-0 rounded-end" id="search-icon">
-                            <i class="bi bi-search"></i> <!-- Bootstrap Search Icon -->
-                        </span>
+                        <input type="search" name="searchkeyword" class="form-control rounded-start border-0"
+                               placeholder="Zoek iets..." value="@ViewData["searchkeyword"]" />
+                        <button class="btn btn-outline-success" type="submit">Zoeken</button>
                     </div>
                 </form>
+               
 
-                
+
+
+
 
                 <!-- Right-side Buttons -->
                 <div class="d-flex align-items-center">
-                    <a class="nav-link text-dark" href="#">Docent worden</a>
-                    <a class="nav-link text-dark" href="#"><i class="bi bi-cart"></i></a> <!-- Replace with cart icon -->
+                    <a class="nav-link text-dark" asp-page="/Cursussen">Alle Cursussen</a>
+                  
                     <partial name="_LoginPartial" />
                 </div>
 

@@ -200,3 +200,136 @@ body {
     
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+.register-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: transparent;
+    padding: 20px;
+}
+
+.register-form-container {
+    max-width: 400px;
+    width: 100%;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-heading {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+    .form-control:focus {
+        border-color: orange;
+        box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+    }
+
+.role-options label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.btn-orange {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+    .btn-orange:hover {
+        background-color: #e69500;
+    }
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: transparent;
+}
+
+.login-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .login-card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: #333333;
+    }
+
+.external-login-options button {
+    margin: 0.5rem 0;
+    width: 100%;
+    background: none;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+    .external-login-options button:hover {
+        background: #f0f0f0;
+    }
+
+.btn-primary {
+    background-color: orange; /* Oranje kleur */
+    border-color: orange;
+}
+
+    .btn-primary:hover {
+        background-color: #e69500;
+        border-color: #e69500;
+    }
+.btn-outline-success {
+    background-color: transparent; /* Transparante achtergrond */
+    color: gray; /* Tekstkleur naar wit */
+    border-color: #ffffff; /* Witte rand */
+}
+
+    .btn-outline-success:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Subtiele overlay bij hover */
+    }
+.nav-link.text-dark {
+    color: grey !important; /* Verander de tekstkleur naar grijs */
+}
+

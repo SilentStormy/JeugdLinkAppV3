@@ -111,39 +111,49 @@
         Van kritieke vaardigheden tot technische onderwerpen, ontdek cursussen die jouw professionele ontwikkeling ondersteunen.
     </p>
 
-    <!-- Category Tabs -->
+
+
     <ul class="nav nav-pills mb-3 justify-content-start" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
             <a class="nav-link @(Model.SelectedCategoryId == null ? "active" : "")"
-               asp-page="/Index" asp-route-categoryId="" role="tab">Alle categorieën</a>
+               asp-page="/Index">Alle categorieën</a>
         </li>
         @foreach (var category in Model.Categories)
         {
             <li class="nav-item" role="presentation">
                 <a class="nav-link @(category.categoryId == Model.SelectedCategoryId ? "active" : "")"
-                   asp-page="/Index" asp-route-categoryId="@category.categoryId"
-                   role="tab">@category.name</a>
+                   asp-page="/Index" asp-route-id="@category.categoryId" role="tab">@category.name</a>
+
             </li>
         }
+
     </ul>
 
-    <!-- Courses Display -->
+    <!-- Courses -->
     <div class="tab-content">
         <div class="tab-pane fade show active">
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                 @if (Model.Courses != null && Model.Courses.Any())
                 {
-                    @foreach (var course in Model.Courses)
+                    @foreach (var course in Model.Courses.Take(4))
                     {
                         <div class="col mb-4">
                             <div class="card shadow-sm">
                                 <img src="~/@course.courseimage" class="card-img-top" alt="@course.title">
                                 <div class="card-body">
                                     <h5 class="card-title">@course.title</h5>
-                                    <p class="card-text">@course.description</p>
-                                    <p class="text-muted">@course.courseprice,-euro</p>
-                                    <p class="text-muted">Begint op: @course.date.ToString("dd-MM-yyyy")</p>
-                                    <a href="#" class="btn btn-primary">Bekijk cursus</a>
+                                    <p class="card-text">
+                                        @if (!string.IsNullOrEmpty(course.description) && course.description.Length > 100)
+                                        {
+                                            @($"{course.description.Substring(0, 100)}...")
+                                        }
+                                        else
+                                        {
+                                            @course.description
+                                        }
+                                    </p>
+                                    <p class="text-muted">Begint op: @course.startdate.ToString("dd-MM-yyyy")</p>
+                                    <a asp-page="/Cursus" asp-route-id="@course.courseid" class="btn btn-primary">Bekijk cursus</a>
                                 </div>
                             </div>
                         </div>
