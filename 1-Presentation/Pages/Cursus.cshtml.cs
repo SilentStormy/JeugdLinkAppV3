@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Elfie.Diagnostics;
+//using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using System.Security.Claims;
 
 namespace JeugdLinkApp.Pages
@@ -61,7 +61,7 @@ namespace JeugdLinkApp.Pages
                 }
 
 
-               var user=await _userManager.GetUserAsync(User) as Student;
+               var user=await _userManager.GetUserAsync(User);
               
                 _courseservice.TryEnrollCourse(user, course);
 

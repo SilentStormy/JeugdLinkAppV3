@@ -13,6 +13,7 @@ using AutoMapper.Internal.Mappers;
 using JeugdLinkBLL.Interfaces;
 using JeugdLinkDAL.Data;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity;
 
 namespace JeugdLinkBLL.Services
 {
@@ -85,7 +86,7 @@ namespace JeugdLinkBLL.Services
             }
         }
 
-        public void TryEnrollCourse(Student student, Course course)
+        public void TryEnrollCourse(IdentityUser student, Course course)
         {
             try
             {

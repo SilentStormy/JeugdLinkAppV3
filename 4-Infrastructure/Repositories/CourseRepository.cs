@@ -2,7 +2,8 @@
     using Core.Repositories;
     using JeugdLinkDAL.Data;
     using JeugdLinkDAL.Repositories.Base;
-    using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging;
     using System;
     using System.Collections.Generic;
@@ -57,7 +58,7 @@
         C.title.ToLower().Contains(searchedcourse.title.ToLower()));
         }
 
-        public void TryEnrollCourse(Student student, Course course)
+        public void TryEnrollCourse(IdentityUser student, Course course)
         {
             if (course == null || student == null)
             {
@@ -70,12 +71,12 @@
                 throw new InvalidOperationException("Deze cursus is al vol!");
             }
 
-            if (course.Enrolledstudents.Any(e => e.studentid == student.StudentId))
-            {
-                throw new InvalidOperationException("De ingelogde student is al ingeschreven in deze cursus!");
-            }
+            //if (course.Enrolledstudents.Any(e => e. == student.UserName))
+            //{
+            //    throw new InvalidOperationException("De ingelogde student is al ingeschreven in deze cursus!");
+            //}
 
-            course.Enrolledstudents.Add(new Enrolledstudent { student = student, course = course });
+            //course.Enrolledstudents.Add(new Enrolledstudent { student = student, course = course });
         }
     }
 

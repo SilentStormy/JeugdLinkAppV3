@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Repositories.Base;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Core.Repositories
             IEnumerable<Course> GetAllCourses();
             IEnumerable<Course> GetCourseByCategory(Category category);
             Course GetCourseById(int id);
-            void TryEnrollCourse(Student student,Course course);
+            void TryEnrollCourse(IdentityUser student,Course course);
             IEnumerable<Course> SearchCourse(Course course);
 
 
